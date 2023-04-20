@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import react, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList, ScrollView,Keyboard ,TouchableOpacity, Alert, TouchableWithoutFeedback } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 
 export default function App() {
@@ -20,8 +20,12 @@ export default function App() {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={() =>{
+      Keyboard.dismiss();
+    }}>
     <View style={styles.container}>
       <View style={styles.head}>
+      <AntDesign style={styles.icon1} name="bars" size={30} color="black" />
       </View>
 
       <View style={styles.titulo}>
@@ -35,6 +39,11 @@ export default function App() {
 
       textAlign='left'/>
 
+      <View style={styles.button}>
+        <Button title='ENVIAR' 
+        onPress={() => Alert.alert('Seu chamado sera enviado, aguarde uma resposta')}></Button>
+        <AntDesign style={styles.icon2} name="rocket1" size={24} color="black" />
+      </View>
     
       <FlatList 
       data={tipos}
@@ -47,6 +56,7 @@ export default function App() {
     
 
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -78,7 +88,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titulo: {
-   justifyContent: 'flex-end',
+    alignItems: 'center',
     marginTop: 30,
     marginHorizontal: 10,
     paddingBottom: 10,
@@ -101,7 +111,25 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
 
-  icon: {
-    alignSelf: 'flex-start'
-  }
+  button: {
+    backgroundColor: '#fc8803',
+    borderColor: '#fc6f03',
+    borderWidth: 3,
+    marginTop: 20,
+    marginBottom: 20,
+    marginHorizontal:110,
+    borderRadius: 10,
+    alignContent: 'center',
+    textAlign: 'left'
+  },
+  icon1:{
+  position: 'absolute',
+  left:335,
+  top: 20,
+  },
+  icon2:{
+    position: 'absolute',
+    right:12,
+    top:5,
+    }
 });
